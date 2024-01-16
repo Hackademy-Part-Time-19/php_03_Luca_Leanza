@@ -45,20 +45,17 @@ class Company {
 }
 
 $company1 = new Company('Apple', 'Cupertino', 10000);
-$company1->PrintDescription();
-$company1->AvgAnnualWage();
 $company2 = new Company('Google', 'California', 20000);
-$company2->PrintDescription();
-$company2->AvgAnnualWage();
 $company3 = new Company('Facebook', 'USA', 30000);
-$company3->PrintDescription();
-$company3->AvgAnnualWage();
 $company4 = new Company('Amazon', 'Seattle', 40000);
-$company4->PrintDescription();
-$company4->AvgAnnualWage();
 $company5 = new Company('Microsoft', 'Redmond', 50000);
-$company5->PrintDescription();
-$company5->AvgAnnualWage();
+
+
+$Companies = [$company1, $company2, $company3, $company4, $company5];
+foreach ($Companies as $Company) {
+    $Company->PrintDescription();
+    $Company->AvgAnnualWage();
+}
 
 Company::PrintTotal();
 
