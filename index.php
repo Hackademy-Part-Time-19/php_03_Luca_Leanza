@@ -4,9 +4,6 @@ class Company {
     public $name;
     public $location;
     public $totEmployees = 0;
-
-    public static $TotalCompanies = 0;
-    public static $TotalEmployeesOfAllCompanies = 0;
     public static $totalAvgAnnualWage = 0;
     public static $avgWage = 1500;
 
@@ -15,10 +12,6 @@ class Company {
         $this->name = $_name;
         $this->location = $_location;
         $this->totEmployees = $_tot_employees;
-
-        self::$TotalEmployeesOfAllCompanies += $this->totEmployees;
-        self::$TotalCompanies++;
-        
     }
     
     public function PrintDescription() {
@@ -30,33 +23,37 @@ class Company {
     }
 
     public function AvgAnnualWage(){
-        $avg_annual_wage = (self::$avgWage * $this->totEmployees) * 12 ;
+        $avg_annual_wage = self::$avgWage * $this->totEmployees * 12 ;
         echo "$this->name's average annual spend is $avg_annual_wage\n";
 
         self::$totalAvgAnnualWage += $avg_annual_wage;
         
     }
+
+    public function avgMonth($month){
+        return self::$avgWage * $this->totEmployees * $month;
+    }
     
     public static function PrintTotal () {
-        echo "The total of all companies is " .  self::$TotalCompanies . "\n";
-        echo "The total of all employees is " .  self::$TotalEmployeesOfAllCompanies . "\n";
         echo "The total of all Avg Annual Wage is " .  self::$totalAvgAnnualWage . "\n";
     }
 }
 
-$company1 = new Company('Apple', 'Cupertino', 10000);
-$company2 = new Company('Google', 'California', 20000);
-$company3 = new Company('Facebook', 'USA', 30000);
-$company4 = new Company('Amazon', 'Seattle', 40000);
-$company5 = new Company('Microsoft', 'Redmond', 50000);
-
-
-$Companies = [$company1, $company2, $company3, $company4, $company5];
-foreach ($Companies as $Company) {
-    $Company->PrintDescription();
-    $Company->AvgAnnualWage();
+$companies = [
+	new Company('Apple', 'Cupertino', 10000),
+	new Company('Google', 'California', 20000), 
+	new Company('Facebook', 'USA', 30000), 
+	new Company('Amazon', 'Seattle', 40000), 
+	new Company('Microsoft', 'Redmond', 50000)
+	];
+	
+foreach ($companies as $company) {
+    $company->PrintDescription();
+    $company->AvgAnnualWage();
 }
 
-Company::PrintTotal();
+echo $companies[1] -> avgMonth(readline ("Su quanti mesi vuoi calcolare le spese? : ")) . "\n";
 
+
+Company::PrintTotal();
 
